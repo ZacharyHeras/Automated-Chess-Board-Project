@@ -22,13 +22,15 @@ driver.get('https://chess.com')
 moveNumber = 1
 
 def getMove():
-    move = WebDriverWait(driver, sys.maxsize)\
+    moveElement = WebDriverWait(driver, sys.maxsize)\
            .until(EC.presence_of_element_located\
                   ((By.XPATH, "//div[@data-ply=" + str(moveNumber) + "]")))
-    print(" move #" + str((moveNumber)) + ": " + move.text)
+    print(" move #" + str((moveNumber)) + ": " + moveElement.text)
+    return moveElement.text
 
 while(not keyboard.is_pressed('q')):
-    getMove()
+    nextMove = getMove()
+    print(nextMove)
     moveNumber +=1
 
 print('\nPress esc key to exit.')
