@@ -1,0 +1,81 @@
+/* Example sketch to control a 28BYJ-48 stepper motor with ULN2003 driver board and Arduino UNO. More info: https://www.makerguides.com */
+// Include the Arduino Stepper.h library:
+#include <Stepper.h>
+// Define number of steps per rotation:
+const int stepsPerRevolution = 2048;
+int steps;
+int stepCounter;
+int max_steps;
+int spee;
+String dir;
+// Wiring:
+// Pin 8 to IN1 on the ULN2003 driver
+// Pin 9 to IN2 on the ULN2003 driver
+// Pin 10 to IN3 on the ULN2003 driver
+// Pin 11 to IN4 on the ULN2003 driver
+// Create stepper object called 'myStepper', note the pin order:
+Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
+void setup() {
+  // Set the speed to 5 rpm:
+  //spee = 5;
+  //myStepper.setSpeed(spee);
+
+  // Begin Serial communication at a baud rate of 9600:
+  Serial.begin(9600);
+}
+void loop() {
+ 
+  stepCounter = 0;
+  Serial.println("Enter Steps: ");
+  while (Serial.available() == 0);
+    steps = Serial.parseInt();
+  while(Serial.available()>0)
+    Serial.read();
+  Serial.println(steps);
+  Serial.println("Enter Speed: ");
+  while (Serial.available()==0){
+  spee = Serial.parseInt();
+  }
+  while(Serial.available()>0)
+    Serial.read();
+  Serial.println(spee);
+  
+ 
+
+  myStepper.setSpeed(spee);
+  myStepper.step(steps);
+
+  // Step one revolution in one direction:
+
+  //Serial.println(stepsPerRevolution);
+  //myStepper.step(stepsPerRevolution);
+  /*
+    for (int i = 0; i < max_steps; i++) {
+      Serial.println("CW");
+      Serial.print("Speed: ");
+      Serial.println(spee);
+      Serial.print("Steps: ");
+      Serial.println(stepCounter);
+      myStepper.step(steps);
+      stepCounter = stepCounter + steps;
+    }
+
+    //delay(500);
+
+
+     for (int i = 0; i < max_steps; i++) {
+      Serial.println("CCW");
+      Serial.print("Speed: ");
+      Serial.println(spee);
+      Serial.print("Steps: ");
+      Serial.println(stepCounter);
+      myStepper.step(-steps);
+      stepCounter = stepCounter + steps;
+    }
+  */
+}
+-- 
+Aatish Gupta
+Junior, Mechanical Engineering
+Henry M. Rowan College of Engineering
+Bantivoglio Honors College
