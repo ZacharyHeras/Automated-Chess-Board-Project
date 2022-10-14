@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # read in image and resize
-img = cv2.imread('chessboard.jpeg')
+img = cv2.imread('chessboard1.jpg')
 
 # percent by which the image is resized
 scale_percent = 50
@@ -25,7 +25,7 @@ cv2.imshow('resized', img)
 # corner coordinates (will get from outermost coordinates of mask r-cnn board segmentation)
 # coordinates are taken clockwise starting in top left corner of board
 # for now it is hardcoded
-coords = np.float32([[25,670], [1090,125], [1980,770], [925,1695]]) * scale_percent / 100
+coords = np.float32([[405,231], [2173,223], [2545,1571], [55,1655]]) * scale_percent / 100
 
 # get resized image height and width
 new_height, new_width, _ = img.shape
